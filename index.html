@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encrypt and Decrypt Message</title>
+    <script>
+        function encryptMessage() {
+            const message = document.getElementById("message").value;
+            const encrypted = btoa(message); // Base64 encoding
+            document.getElementById("encryptedMessage").textContent = encrypted;
+        }
+
+        function decryptMessage() {
+            const encryptedMessage = document.getElementById("encryptedInput").value;
+            try {
+                const decrypted = atob(encryptedMessage); // Base64 decoding
+                document.getElementById("decryptedMessage").textContent = decrypted;
+            } catch (e) {
+                document.getElementById("decryptedMessage").textContent = "Invalid encrypted message!";
+            }
+        }
+    </script>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif, Old English Text MT;
+        margin: 20px;
+        padding: 0;
+        background-color: rgb(0, 253, 245);}
+
+    h1 {
+        color: #4CAF50;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        box-sizing: border-box;
+        border: 2px solid plum;
+        border-radius: 4px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    p {
+        background-color: plum;
+        padding: 10px;
+        border: 1px solid plum;
+        border-radius: 4px;
+    }
+</style>
+<body>
+    <h1>Message Encryptor and Decryptor</h1>
+    <label for="message">Enter your message:</label>
+    <input type="text" id="message" placeholder="Type your message here">
+    <button onclick="encryptMessage()">Encrypt</button>
+    <h2>Encrypted Message:</h2>
+    <p id="encryptedMessage"></p>
+
+    <h2>Decrypt Message:</h2>
+    <label for="encryptedInput">Enter encrypted message:</label>
+    <input type="text" id="encryptedInput" placeholder="Paste encrypted message here">
+    <button onclick="decryptMessage()">Decrypt</button>
+    <h2>Decrypted Message:</h2>
+    <p id="decryptedMessage"></p>
+    <script>
+        const translationMap = {
+            en: {
+                hello: "Hello",
+                world: "World",
+            },
+            es: {
+                hello: "Hola",
+                world: "Mundo",
+            },
+            fr: {
+                hello: "Bonjour",
+                world: "Monde",
+            },
+            // Add more translations here
+        };
+    
+        function translateDecryptedMessage(lang) {
+            const decryptedMessage = document.getElementById("decryptedMessage").textContent;
+            const words = decryptedMessage.split(" ");
+            const translatedWords = words.map(word => translationMap[lang]?.[word.toLowerCase()] || word);
+            document.getElementById("translatedMessage").textContent = translatedWords.join(" ");
+        }
+    </script>
+    
+</body>
+</html>
